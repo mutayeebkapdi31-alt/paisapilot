@@ -52,7 +52,10 @@ GEMINI_FALLBACK_MODEL = os.getenv(
     "gemini-3.5-flash-lite",
 )
 
-DB_FILE = ROOT / "paisa_pilot.db"
+# Use a persistent mounted volume in production (for example, /var/data/paisa_pilot.db
+# on Render). Without DATABASE_PATH, local development keeps the DB beside app.py.
+DB_FILE = Path(os.getenv("DATABASE_PATH", str(ROOT / "paisa_pilot.db"))).expanduser()
+DB_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 HOST = "127.0.0.1"
 PORT = 8000

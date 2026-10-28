@@ -116,8 +116,11 @@ async function api(path, method = "GET", body) {
 async function saveState() {
   try {
     await api("/api/state", "POST", state);
+    return true;
   } catch (error) {
-    toast(error.message);
+    // Do not let callers show a success toast when the server rejected the save.
+    toast(`Could not save your data: ${error.message}`);
+    throw error;
   }
 }
 
