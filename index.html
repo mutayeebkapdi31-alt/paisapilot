@@ -1,0 +1,1208 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="theme-color" content="#f5f7f3">
+  <meta name="description" content="PaisaPilot helps you track expenses, manage budgets, grow savings goals, and stay ahead of recurring payments.">
+
+  <title>PaisaPilot — Money, Made Clearer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- ==================== AUTHENTICATION ==================== -->
+  <section class="auth-screen" id="auth-screen">
+    <div class="auth-visual">
+      <a class="auth-brand" href="#" aria-label="PaisaPilot home">
+        <span class="brand-mark">₹</span>
+        <span>Paisa<span>Pilot</span></span>
+      </a>
+
+      <div class="auth-message">
+        <span class="eyebrow">A LITTLE MORE IN CONTROL</span>
+
+        <h1>Your money story<br><em>starts here.</em></h1>
+
+        <p>
+          Track everyday spending, make a plan that feels like you,
+          and see your goals move closer.
+        </p>
+
+        <div class="auth-note">
+          <span aria-hidden="true">✦</span>
+          <div>
+            <b>A clearer picture, every day</b>
+            <small>Your budgets, goals, and spending in one place.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-caption">
+        BUILT FOR REAL LIFE, ONE RUPEE AT A TIME
+      </div>
+    </div>
+
+    <div class="auth-form-side">
+      <div class="auth-card">
+        <div class="auth-mobile-brand">
+          <span class="brand-mark">₹</span>
+          <span>PaisaPilot</span>
+        </div>
+
+        <div class="auth-tabs" role="tablist" aria-label="Account access">
+          <button
+            class="auth-tab active"
+            data-auth-tab="login"
+            type="button"
+            role="tab"
+            aria-selected="true"
+          >
+            Log in
+          </button>
+
+          <button
+            class="auth-tab"
+            data-auth-tab="register"
+            type="button"
+            role="tab"
+            aria-selected="false"
+          >
+            Create account
+          </button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <span class="eyebrow">WELCOME BACK</span>
+          <h2>Good to see you.</h2>
+          <p>Pick up where you left off.</p>
+
+          <label>
+            Email address
+            <input
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              maxlength="254"
+              required
+            >
+          </label>
+
+          <label>
+            Password
+            <input
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Your password"
+              maxlength="128"
+              required
+            >
+          </label>
+
+          <button class="button dark auth-submit" type="submit">
+            Log in <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <form id="register-form" class="auth-form" hidden>
+          <span class="eyebrow">YOUR NEXT CHAPTER</span>
+          <h2>Let’s get started.</h2>
+          <p>Create your free PaisaPilot account.</p>
+
+          <label>
+            Your name
+            <input
+              name="name"
+              autocomplete="name"
+              minlength="2"
+              maxlength="60"
+              placeholder="e.g. Aditi Sharma"
+              required
+            >
+          </label>
+
+          <label>
+            Email address
+            <input
+              name="email"
+              type="email"
+              autocomplete="email"
+              maxlength="254"
+              placeholder="you@example.com"
+              required
+            >
+          </label>
+
+          <label>
+            Password
+            <input
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              minlength="8"
+              maxlength="128"
+              placeholder="At least 8 characters"
+              required
+            >
+          </label>
+
+          <button class="button dark auth-submit" type="submit">
+            Create my account <span aria-hidden="true">→</span>
+          </button>
+
+          <small class="fine-print">
+            Your data belongs to your account.
+          </small>
+        </form>
+
+        <div
+          class="auth-error"
+          id="auth-error"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+        <div class="security-note">
+          <span aria-hidden="true">▣</span>
+          &nbsp; Your password is protected. Your account data is private.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MAIN APPLICATION ==================== -->
+  <div class="app-shell" id="app-shell" hidden>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard" aria-label="PaisaPilot overview">
+        <span class="brand-mark">₹</span>
+        <span>
+          Paisa<span class="brand-light">Pilot</span>
+          <small>MONEY, MADE CLEARER</small>
+        </span>
+      </a>
+
+      <div class="side-label">YOUR MONEY</div>
+
+      <nav class="nav-list" aria-label="Main navigation">
+        <button
+          class="nav-item active"
+          data-page="dashboard"
+          type="button"
+          aria-current="page"
+        >
+          <span aria-hidden="true">◫</span>
+          Overview
+        </button>
+
+        <button class="nav-item" data-page="transactions" type="button">
+          <span aria-hidden="true">↕</span>
+          Transactions
+          <i id="nav-tx-count">0</i>
+        </button>
+
+        <button class="nav-item" data-page="budgets" type="button">
+          <span aria-hidden="true">▤</span>
+          Budgets
+        </button>
+
+        <button class="nav-item" data-page="goals" type="button">
+          <span aria-hidden="true">◎</span>
+          Savings goals
+        </button>
+
+        <button class="nav-item" data-page="recurring" type="button">
+          <span aria-hidden="true">◷</span>
+          Recurring payments
+        </button>
+
+        <button class="nav-item" data-page="insights" type="button">
+          <span aria-hidden="true">⌁</span>
+          Insights
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="coach-card">
+          <span class="coach-star" aria-hidden="true">✳</span>
+          <b>Little wins add up.</b>
+          <p>Build money habits at your own pace.</p>
+          <span class="streak">✦ Your progress, your pace</span>
+        </div>
+
+        <div class="profile-row">
+          <span class="avatar" id="profile-avatar">P</span>
+
+          <span class="profile-copy">
+            <b id="profile-name">Your account</b>
+            <small id="profile-email">PaisaPilot member</small>
+          </span>
+
+          <button
+            id="logout-button"
+            class="logout"
+            type="button"
+            title="Log out"
+            aria-label="Log out"
+          >
+            ↗
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <div
+      id="sidebar-backdrop"
+      class="sidebar-backdrop"
+      aria-hidden="true"
+    ></div>
+
+    <main class="main-content">
+      <!-- TOP NAVIGATION -->
+      <header class="topbar">
+        <button
+          id="menu-toggle"
+          class="mobile-menu"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="sidebar"
+        >
+          ☰
+        </button>
+
+        <div class="breadcrumb">
+          PaisaPilot <span aria-hidden="true">/</span>
+          <b id="page-title">Overview</b>
+        </div>
+
+        <div class="top-right">
+          <span class="today-pill">
+            <i aria-hidden="true"></i>
+            <span id="header-date">TODAY</span>
+          </span>
+
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            type="button"
+            aria-label="Switch to dark theme"
+            aria-pressed="false"
+          >
+            <span class="theme-symbol" aria-hidden="true">☼</span>
+            <span class="theme-track"><i></i></span>
+            <span class="theme-word" id="theme-word">Light</span>
+          </button>
+
+          <button
+            id="help-btn"
+            class="help-button"
+            type="button"
+            aria-label="Help"
+            aria-haspopup="dialog"
+          >
+            ?
+          </button>
+
+          <span
+            id="top-avatar"
+            class="avatar small-avatar"
+            aria-label="Account avatar"
+          >
+            P
+          </span>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <!-- ==================== DASHBOARD ==================== -->
+        <section class="page active" id="page-dashboard">
+          <div class="welcome-row">
+            <div>
+              <span class="eyebrow">YOUR MONEY AT A GLANCE</span>
+              <h1>
+                Good morning,
+                <span id="greeting-name">there</span>
+                <span class="wave" aria-hidden="true">✦</span>
+              </h1>
+              <p>Small steps today can make tomorrow feel easier.</p>
+            </div>
+
+            <button class="button dark" data-open="transaction" type="button">
+              ＋ Add transaction
+            </button>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card featured">
+              <div class="stat-label">
+                Available balance <span aria-hidden="true">₹</span>
+              </div>
+              <strong id="balance">₹0</strong>
+              <small>From income and expenses you’ve recorded</small>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-label">
+                Spent this month
+                <span class="tint peach" aria-hidden="true">↗</span>
+              </div>
+              <strong id="spent">₹0</strong>
+              <small id="spend-status">Your monthly spending</small>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-label">
+                Budget remaining
+                <span class="tint lilac" aria-hidden="true">▤</span>
+              </div>
+              <strong id="budget-left">₹0</strong>
+              <div
+                class="meter"
+                role="progressbar"
+                aria-label="Budget usage"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <i id="budget-meter"></i>
+              </div>
+              <small id="budget-caption">Across your categories</small>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-label">
+                Saved for goals
+                <span class="tint gold" aria-hidden="true">◎</span>
+              </div>
+              <strong id="saved-total">₹0</strong>
+              <small id="goal-caption">Start with something you want</small>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Spending this month</h2>
+                  <p>See the rhythm of your spending.</p>
+                </div>
+                <button class="quiet-link" data-go="insights" type="button">
+                  More insights ↗
+                </button>
+              </div>
+
+              <div class="chart-top">
+                <strong id="chart-total">₹0</strong>
+                <span>MONTH TO DATE</span>
+              </div>
+
+              <div class="chart-wrap">
+                <div class="chart-labels" aria-hidden="true">
+                  <span>₹8k</span>
+                  <span>₹6k</span>
+                  <span>₹4k</span>
+                  <span>₹2k</span>
+                  <span>₹0</span>
+                </div>
+
+                <canvas
+                  id="spending-chart"
+                  aria-label="Monthly daily spending chart"
+                  role="img"
+                >
+                  Monthly spending chart.
+                </canvas>
+              </div>
+
+              <div class="chart-foot">
+                <span><i aria-hidden="true"></i> Daily expenses</span>
+                <span id="chart-days">This month</span>
+              </div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Budget check-in</h2>
+                  <p>How your categories are doing.</p>
+                </div>
+                <button class="quiet-link" data-go="budgets" type="button">
+                  View budgets ↗
+                </button>
+              </div>
+
+              <div id="dashboard-budgets" class="compact-budgets"></div>
+
+              <div class="panel-bottom">
+                <button class="button soft full" data-go="budgets" type="button">
+                  Set up your budget <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <div class="dashboard-grid lower">
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Recent transactions</h2>
+                  <p>Your latest ins and outs.</p>
+                </div>
+                <button
+                  class="quiet-link"
+                  data-go="transactions"
+                  type="button"
+                >
+                  All transactions ↗
+                </button>
+              </div>
+
+              <div id="recent-list" class="list"></div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Savings goals</h2>
+                  <p>Make room for something exciting.</p>
+                </div>
+                <button class="quiet-link" data-go="goals" type="button">
+                  All goals ↗
+                </button>
+              </div>
+
+              <div id="dashboard-goals" class="list"></div>
+            </article>
+          </div>
+
+          <!-- AFFORDABILITY CHECKER -->
+          <div class="feature-banner">
+            <div>
+              <span class="eyebrow">THE PAISAPILOT CHECK</span>
+              <h2>Can I afford this?</h2>
+              <p>
+                Check what a purchase could mean for your budget
+                and a savings goal.
+              </p>
+
+              <div class="afford-row">
+                <label class="money-input">
+                  <span aria-hidden="true">₹</span>
+                  <input
+                    id="purchase-amount"
+                    type="number"
+                    min="1"
+                    step="1"
+                    inputmode="numeric"
+                    placeholder="Enter a price"
+                    aria-label="Purchase price in rupees"
+                  >
+                </label>
+
+                <button id="check-afford" class="button dark" type="button">
+                  Check it →
+                </button>
+              </div>
+
+              <div
+                id="afford-result"
+                class="afford-result"
+                aria-live="polite"
+              >
+                Try it before your next big purchase.
+              </div>
+            </div>
+
+            <div class="banner-art" aria-hidden="true">
+              ₹<i>✦</i><b>✧</b>
+            </div>
+          </div>
+
+          <div class="quick-links">
+            <button data-open="transaction" type="button">
+              ＋ Add expense or income
+            </button>
+            <button data-open="budget" type="button">
+              ▤ Set a category budget
+            </button>
+            <button data-open="goal" type="button">
+              ◎ Start a savings goal
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================== TRANSACTIONS ==================== -->
+        <section class="page" id="page-transactions">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">EVERY RUPEE HAS A STORY</span>
+              <h1>Transactions</h1>
+              <p>Keep track of money coming in and going out.</p>
+            </div>
+
+            <button class="button dark" data-open="transaction" type="button">
+              ＋ Add transaction
+            </button>
+          </div>
+
+          <article class="panel">
+            <div class="filter-row">
+              <label class="search-box">
+                <span aria-hidden="true">⌕</span>
+                <input
+                  id="tx-search"
+                  type="search"
+                  placeholder="Search transactions"
+                  aria-label="Search transactions"
+                >
+              </label>
+
+              <select id="tx-type-filter" aria-label="Filter by transaction type">
+                <option value="all">All types</option>
+                <option value="expense">Expenses</option>
+                <option value="income">Income</option>
+              </select>
+
+              <select
+                id="tx-category-filter"
+                aria-label="Filter by category"
+              >
+                <option value="all">All categories</option>
+              </select>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">DESCRIPTION</th>
+                    <th scope="col">CATEGORY</th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">TYPE</th>
+                    <th scope="col" class="right">AMOUNT</th>
+                    <th scope="col">
+                      <span class="sr-only">Actions</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="transaction-table"></tbody>
+              </table>
+            </div>
+
+            <div id="tx-empty" class="empty-state" hidden>
+              No transactions match your filters.
+            </div>
+          </article>
+        </section>
+
+        <!-- ==================== BUDGETS ==================== -->
+        <section class="page" id="page-budgets">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">A PLAN THAT FITS YOUR LIFE</span>
+              <h1>Your budgets</h1>
+              <p>
+                Choose the categories and monthly limits that work for you.
+              </p>
+            </div>
+
+            <button class="button dark" data-open="budget" type="button">
+              ＋ Add budget
+            </button>
+          </div>
+
+          <div class="budget-summary-grid">
+            <article class="stat-card">
+              <small>Total planned</small>
+              <strong id="budget-total">₹0</strong>
+              <span>Across all your categories</span>
+            </article>
+
+            <article class="stat-card">
+              <small>Spent so far</small>
+              <strong id="budget-spent">₹0</strong>
+              <span>This calendar month</span>
+            </article>
+
+            <article class="stat-card">
+              <small>Still available</small>
+              <strong id="budget-available">₹0</strong>
+              <span>Across all your categories</span>
+            </article>
+          </div>
+
+          <div id="budget-cards" class="budget-cards"></div>
+
+          <div class="tip-box">
+            <span aria-hidden="true">✦</span>
+            <div>
+              <b>Your budget is a guide, not a grade.</b>
+              <p>
+                Adjust your limits whenever your plans or priorities change.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SAVINGS GOALS ==================== -->
+        <section class="page" id="page-goals">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">SAVE FOR WHAT MATTERS TO YOU</span>
+              <h1>Savings goals</h1>
+              <p>
+                Give your plans a name, a target, and a little momentum.
+              </p>
+            </div>
+
+            <button class="button dark" data-open="goal" type="button">
+              ＋ Create a goal
+            </button>
+          </div>
+
+          <div id="goal-cards" class="goal-cards"></div>
+
+          <div id="goals-empty" class="empty-panel" hidden>
+            <span aria-hidden="true">◎</span>
+            <h2>Your first goal starts here</h2>
+            <p>
+              Save for a trip, a course, a new gadget,
+              or anything you’re looking forward to.
+            </p>
+            <button class="button dark" data-open="goal" type="button">
+              Create a savings goal
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================== RECURRING PAYMENTS ==================== -->
+        <section class="page" id="page-recurring">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">STAY ONE STEP AHEAD</span>
+              <h1>Recurring payments</h1>
+              <p>
+                Keep subscriptions and regular bills on your radar.
+              </p>
+            </div>
+
+            <button class="button dark" data-open="recurring" type="button">
+              ＋ Add reminder
+            </button>
+          </div>
+
+          <div class="recurring-summary">
+            <article class="panel">
+              <span class="summary-icon" aria-hidden="true">◷</span>
+              <small>MONTHLY COMMITMENTS</small>
+              <strong id="recurring-total">₹0</strong>
+              <p>Sum of the reminders you’ve added.</p>
+            </article>
+
+            <article class="panel">
+              <span class="summary-icon" aria-hidden="true">↗</span>
+              <small>NEXT PAYMENT</small>
+              <strong id="next-payment">Nothing scheduled</strong>
+              <p id="next-payment-date">
+                Add a reminder to see what’s coming.
+              </p>
+            </article>
+          </div>
+
+          <div id="recurring-list" class="recurring-list"></div>
+
+          <div id="recurring-empty" class="empty-panel" hidden>
+            <span aria-hidden="true">◷</span>
+            <h2>No reminders yet</h2>
+            <p>
+              Add subscriptions, rent, bills, or other regular payments.
+            </p>
+            <button class="button dark" data-open="recurring" type="button">
+              Add a reminder
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================== INSIGHTS ==================== -->
+        <section class="page" id="page-insights">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">UNDERSTAND YOUR MONEY HABITS</span>
+              <h1>Insights</h1>
+              <p>
+                Simple summaries to help you make your next money decision.
+              </p>
+            </div>
+
+            <label>
+              <span class="sr-only">Insights period</span>
+              <select id="insight-period" class="period-select">
+                <option value="month">This month</option>
+                <option value="all">All time</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="insight-stats">
+            <article class="panel">
+              <small>TOTAL INCOME</small>
+              <strong id="insight-income">₹0</strong>
+              <span>Recorded in the selected period</span>
+            </article>
+
+            <article class="panel">
+              <small>TOTAL EXPENSES</small>
+              <strong id="insight-spent">₹0</strong>
+              <span>Recorded in the selected period</span>
+            </article>
+
+            <article class="panel">
+              <small>NET CASH FLOW</small>
+              <strong id="insight-net">₹0</strong>
+              <span>Income minus expenses</span>
+            </article>
+
+            <article class="panel">
+              <small>AVERAGE DAILY SPEND</small>
+              <strong id="insight-average">₹0</strong>
+              <span>Based on this month so far</span>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Spending by category</h2>
+                  <p>Where your recorded expenses went.</p>
+                </div>
+              </div>
+
+              <div id="insight-categories" class="insight-categories"></div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Your money notes</h2>
+                  <p>Helpful observations from your activity.</p>
+                </div>
+              </div>
+
+              <div id="insight-notes" class="insight-notes"></div>
+            </article>
+          </div>
+
+          <div class="disclaimer">
+            Insights use only the transactions you enter.
+            They’re for planning and learning, not financial advice.
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ==================== PAISAPILOT AI ASSISTANT ==================== -->
+    <section class="ai-assistant" id="ai-assistant" aria-label="PaisaPilot AI assistant">
+      <button
+        class="ai-launcher"
+        id="ai-launcher"
+        type="button"
+        aria-expanded="false"
+        aria-controls="ai-panel"
+      >
+        <span class="ai-launcher-spark" aria-hidden="true">✦</span>
+        <span>Ask PaisaPilot AI</span>
+      </button>
+
+      <section class="ai-panel" id="ai-panel" aria-labelledby="ai-title" hidden>
+        <header class="ai-panel-header">
+          <div class="ai-avatar" aria-hidden="true">✦</div>
+          <div class="ai-heading-copy">
+            <h2 id="ai-title">Your money companion</h2>
+            <p><span class="ai-status-dot"></span> AI assistant · Uses your PaisaPilot data</p>
+          </div>
+          <button class="ai-close" id="ai-close" type="button" aria-label="Close AI assistant">×</button>
+        </header>
+
+        <div class="ai-messages" id="ai-messages" role="log" aria-live="polite" aria-relevant="additions text">
+          <article class="ai-message assistant">
+            <div class="ai-message-avatar" aria-hidden="true">✦</div>
+            <div class="ai-bubble">
+              <p>Hi! I can help you understand your spending, plan a budget, and work toward your savings goals.</p>
+              <p class="ai-small-note">I use the financial information saved in your signed-in PaisaPilot account. I can offer guidance, but I can’t change your records.</p>
+            </div>
+          </article>
+          <div class="ai-suggestions" id="ai-suggestions">
+            <button type="button" data-ai-prompt="Where am I spending the most money this month?">Where am I spending most?</button>
+            <button type="button" data-ai-prompt="Help me make a realistic monthly budget based on my data.">Help me plan a budget</button>
+            <button type="button" data-ai-prompt="How can I work toward my savings goals with my current finances?">Improve my savings</button>
+          </div>
+        </div>
+
+        <form class="ai-composer" id="ai-form">
+          <label class="sr-only" for="ai-input">Ask PaisaPilot AI a question</label>
+          <textarea
+            id="ai-input"
+            name="message"
+            rows="1"
+            maxlength="2000"
+            placeholder="Ask about your money..."
+            required
+          ></textarea>
+          <button id="ai-send" class="ai-send" type="submit" aria-label="Send message">
+            <span aria-hidden="true">↑</span>
+          </button>
+          <div class="ai-composer-foot">
+            <span>Up to 2,000 characters</span>
+            <span>AI can make mistakes. Check important decisions.</span>
+          </div>
+        </form>
+      </section>
+    </section>
+  </div>
+
+  <!-- ==================== GLOBAL NOTIFICATIONS ==================== -->
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
+
+  <!-- ==================== TRANSACTION DIALOG ==================== -->
+  <dialog id="transaction-dialog" aria-labelledby="transaction-dialog-heading">
+    <form id="transaction-form" method="dialog">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">RECORD THE MOMENT</span>
+          <h2 id="transaction-dialog-heading">Add a transaction</h2>
+        </div>
+
+        <button
+          class="close-dialog"
+          type="button"
+          data-close-dialog="transaction-dialog"
+          aria-label="Close dialog"
+        >
+          ×
+        </button>
+      </div>
+
+      <label>
+        Description
+        <input
+          name="name"
+          maxlength="100"
+          placeholder="e.g. Lunch with friends"
+          required
+        >
+      </label>
+
+      <div class="form-grid">
+        <label>
+          Amount in rupees
+          <input
+            name="amount"
+            type="number"
+            min="1"
+            step="1"
+            inputmode="numeric"
+            placeholder="0"
+            required
+          >
+        </label>
+
+        <label>
+          Type
+          <select name="type" required>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          Category
+          <select name="category" id="tx-category-select" required></select>
+        </label>
+
+        <label>
+          Date
+          <input name="date" type="date" required>
+        </label>
+      </div>
+
+      <button class="button dark dialog-submit" type="submit" value="default">
+        Save transaction →
+      </button>
+    </form>
+  </dialog>
+
+  <!-- ==================== BUDGET DIALOG ==================== -->
+  <dialog id="budget-dialog" aria-labelledby="budget-dialog-title">
+    <form id="budget-form" method="dialog">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">MAKE IT YOURS</span>
+          <h2 id="budget-dialog-title">Add a budget</h2>
+        </div>
+
+        <button
+          class="close-dialog"
+          type="button"
+          data-close-dialog="budget-dialog"
+          aria-label="Close dialog"
+        >
+          ×
+        </button>
+      </div>
+
+      <label>
+        Category name
+        <input
+          name="category"
+          maxlength="32"
+          placeholder="e.g. Eating out"
+          required
+        >
+      </label>
+
+      <label>
+        Monthly limit in rupees
+        <input
+          name="limit"
+          type="number"
+          min="0"
+          step="1"
+          inputmode="numeric"
+          placeholder="e.g. 3000"
+          required
+        >
+      </label>
+
+      <button class="button dark dialog-submit" type="submit" value="default">
+        Save budget →
+      </button>
+    </form>
+  </dialog>
+
+  <!-- ==================== GOAL DIALOG ==================== -->
+  <dialog id="goal-dialog" aria-labelledby="goal-dialog-title">
+    <form id="goal-form" method="dialog">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">A LITTLE GOES A LONG WAY</span>
+          <h2 id="goal-dialog-title">Create a savings goal</h2>
+        </div>
+
+        <button
+          class="close-dialog"
+          type="button"
+          data-close-dialog="goal-dialog"
+          aria-label="Close dialog"
+        >
+          ×
+        </button>
+      </div>
+
+      <label>
+        What are you saving for?
+        <input
+          name="name"
+          maxlength="60"
+          placeholder="e.g. A new laptop"
+          required
+        >
+      </label>
+
+      <div class="form-grid">
+        <label>
+          Target amount
+          <input
+            name="target"
+            type="number"
+            min="1"
+            step="1"
+            inputmode="numeric"
+            placeholder="0"
+            required
+          >
+        </label>
+
+        <label>
+          Already saved
+          <input
+            name="saved"
+            type="number"
+            min="0"
+            step="1"
+            inputmode="numeric"
+            value="0"
+            required
+          >
+        </label>
+      </div>
+
+      <button class="button dark dialog-submit" type="submit" value="default">
+        Create goal →
+      </button>
+    </form>
+  </dialog>
+
+  <!-- ==================== GOAL CONTRIBUTION DIALOG ==================== -->
+  <dialog
+    id="contribution-dialog"
+    aria-labelledby="contribution-dialog-title"
+  >
+    <form id="contribution-form" method="dialog">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">A SMALL STEP FORWARD</span>
+          <h2 id="contribution-dialog-title">Add to your goal</h2>
+        </div>
+
+        <button
+          class="close-dialog"
+          type="button"
+          data-close-dialog="contribution-dialog"
+          aria-label="Close dialog"
+        >
+          ×
+        </button>
+      </div>
+
+      <p id="contribution-goal-name" class="dialog-copy"></p>
+
+      <label>
+        Amount to add
+        <input
+          name="amount"
+          type="number"
+          min="1"
+          step="1"
+          inputmode="numeric"
+          placeholder="0"
+          required
+        >
+      </label>
+
+      <button class="button dark dialog-submit" type="submit" value="default">
+        Add savings →
+      </button>
+    </form>
+  </dialog>
+
+  <!-- ==================== RECURRING PAYMENT DIALOG ==================== -->
+  <dialog id="recurring-dialog" aria-labelledby="recurring-dialog-title">
+    <form id="recurring-form" method="dialog">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">NO SURPRISES</span>
+          <h2 id="recurring-dialog-title">Add a payment reminder</h2>
+        </div>
+
+        <button
+          class="close-dialog"
+          type="button"
+          data-close-dialog="recurring-dialog"
+          aria-label="Close dialog"
+        >
+          ×
+        </button>
+      </div>
+
+      <label>
+        Payment name
+        <input
+          name="name"
+          maxlength="60"
+          placeholder="e.g. Music subscription"
+          required
+        >
+      </label>
+
+      <div class="form-grid">
+        <label>
+          Amount in rupees
+          <input
+            name="amount"
+            type="number"
+            min="1"
+            step="1"
+            inputmode="numeric"
+            placeholder="0"
+            required
+          >
+        </label>
+
+        <label>
+          Next due date
+          <input name="date" type="date" required>
+        </label>
+      </div>
+
+      <label>
+        Frequency
+        <select name="frequency" required>
+          <option value="Monthly">Monthly</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Yearly">Yearly</option>
+          <option value="One time">One time</option>
+        </select>
+      </label>
+
+      <button class="button dark dialog-submit" type="submit" value="default">
+        Save reminder →
+      </button>
+    </form>
+  </dialog>
+
+  <!-- ==================== HELP DIALOG ==================== -->
+  <dialog id="help-dialog" aria-labelledby="help-dialog-title">
+    <form method="dialog">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">YOUR MONEY COMPANION</span>
+          <h2 id="help-dialog-title">Welcome to PaisaPilot</h2>
+        </div>
+
+        <button
+          class="close-dialog"
+          type="submit"
+          value="cancel"
+          aria-label="Close dialog"
+        >
+          ×
+        </button>
+      </div>
+
+      <p class="dialog-copy">
+        Record income and expenses, choose your own budget categories,
+        and track goals and regular payments. Your account data is stored
+        by the PaisaPilot server.
+      </p>
+
+      <button class="button dark dialog-submit" type="submit" value="cancel">
+        Got it →
+      </button>
+    </form>
+  </dialog>
+
+  <!-- Load the app after the page markup. -->
+  <script src="app.js" defer></script>
+</body>
+</html>

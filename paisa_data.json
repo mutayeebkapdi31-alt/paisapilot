@@ -1,0 +1,167 @@
+{
+  "balance": 18450,
+  "monthlyIncome": 28000,
+  "transactions": [
+    {
+      "id": 1,
+      "name": "Monthly pocket money",
+      "category": "Income",
+      "amount": 12000,
+      "type": "income",
+      "date": "2026-10-01"
+    },
+    {
+      "id": 2,
+      "name": "Freelance design project",
+      "category": "Income",
+      "amount": 16000,
+      "type": "income",
+      "date": "2026-10-03"
+    },
+    {
+      "id": 3,
+      "name": "Coffee & breakfast",
+      "category": "Food",
+      "amount": 240,
+      "type": "expense",
+      "date": "2026-10-27"
+    },
+    {
+      "id": 4,
+      "name": "Metro recharge",
+      "category": "Transport",
+      "amount": 500,
+      "type": "expense",
+      "date": "2026-10-26"
+    },
+    {
+      "id": 5,
+      "name": "Spotify Premium",
+      "category": "Subscriptions",
+      "amount": 119,
+      "type": "expense",
+      "date": "2026-10-25"
+    },
+    {
+      "id": 6,
+      "name": "Lunch with friends",
+      "category": "Food",
+      "amount": 380,
+      "type": "expense",
+      "date": "2026-10-24"
+    },
+    {
+      "id": 7,
+      "name": "College stationery",
+      "category": "Education",
+      "amount": 650,
+      "type": "expense",
+      "date": "2026-10-22"
+    },
+    {
+      "id": 8,
+      "name": "Movie night",
+      "category": "Fun",
+      "amount": 450,
+      "type": "expense",
+      "date": "2026-10-20"
+    },
+    {
+      "id": 9,
+      "name": "Groceries",
+      "category": "Food",
+      "amount": 780,
+      "type": "expense",
+      "date": "2026-10-18"
+    },
+    {
+      "id": 10,
+      "name": "Auto rides",
+      "category": "Transport",
+      "amount": 340,
+      "type": "expense",
+      "date": "2026-10-16"
+    },
+    {
+      "id": 11,
+      "name": "Textbooks",
+      "category": "Education",
+      "amount": 1200,
+      "type": "expense",
+      "date": "2026-10-12"
+    },
+    {
+      "id": 12,
+      "name": "Dinner out",
+      "category": "Food",
+      "amount": 620,
+      "type": "expense",
+      "date": "2026-10-09"
+    },
+    {
+      "id": 13,
+      "name": "Headphones fund",
+      "category": "Savings",
+      "amount": 2000,
+      "type": "expense",
+      "date": "2026-10-05"
+    }
+  ],
+  "budgets": {
+    "Food": 5000,
+    "Transport": 2200,
+    "Education": 3500,
+    "Fun": 1800,
+    "Subscriptions": 800,
+    "Savings": 5000
+  },
+  "goals": [
+    {
+      "id": 1,
+      "name": "New headphones",
+      "target": 8000,
+      "saved": 5200,
+      "emoji": "\ud83c\udfa7",
+      "due": "Nov 20"
+    },
+    {
+      "id": 2,
+      "name": "Goa trip",
+      "target": 18000,
+      "saved": 7500,
+      "emoji": "\ud83c\udfdd\ufe0f",
+      "due": "Dec 15"
+    },
+    {
+      "id": 3,
+      "name": "Online course",
+      "target": 6000,
+      "saved": 3600,
+      "emoji": "\ud83d\udcda",
+      "due": "Jan 10"
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": 1,
+      "name": "Spotify Premium",
+      "amount": 119,
+      "date": "2026-10-30",
+      "emoji": "\ud83c\udfb5"
+    },
+    {
+      "id": 2,
+      "name": "Netflix",
+      "amount": 199,
+      "date": "2026-11-02",
+      "emoji": "\ud83c\udfac"
+    },
+    {
+      "id": 3,
+      "name": "YouTube Premium",
+      "amount": 129,
+      "date": "2026-11-05",
+      "emoji": "\u25b6\ufe0f"
+    }
+  ]
+}
