@@ -995,25 +995,31 @@ User's question:
         print("PaisaPilot | " + fmt % args)
 
 
+
 # ============================================================
 # START SERVER
 # ============================================================
 
 if __name__ == "__main__":
+    import os
+
+    # Initialize the database before starting the server.
     init_db()
+
+    # Render provides PORT automatically.
+    HOST = "0.0.0.0"
+    PORT = int(os.environ.get("PORT", "10000"))
 
     server = ThreadingHTTPServer((HOST, PORT), Handler)
 
     print()
     print("=" * 48)
     print("  PaisaPilot is ready!")
-    print(f"  Open: http://{HOST}:{PORT}")
+    print(f"  Listening on: {HOST}:{PORT}")
     print(f"  Database: {DB_FILE.name}")
     print(f"  Gemini primary model: {GEMINI_MODEL}")
     print(f"  Gemini fallback model: {GEMINI_FALLBACK_MODEL}")
-    print("  Press Ctrl+C to stop the server.")
-    print("=" * 48)
-    print()
+    print("=" * 48, flush=True)
 
     try:
         server.serve_forever()
